@@ -3,18 +3,18 @@
 <head>
   <meta charset="utf-8">
   
-  <title>about me | oniceriver</title>
+  <title>更好的PHP配置工具 | oniceriver</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="关于我男程序猿主要技能:PHP其他技能:MySQL,JavaScript,Linux">
+  <meta name="description" content="现在的项目中使用了yaml作为路由等配置的格式.但是symfony解析yaml的工具过多的使用了正则解析,这严重的影响了PHP的运行速度.分析了性能瓶颈后,首先采用的是缓存的方式解决问题.即将解析后的配置数组存到redis中去,并设定一个过期时间.那在过期时间之前所有的请求均不再解析文件,而是直接去redis中查询配置信息.这样的好处是不管部署到多少台机子上,也不管有多少请求,解析都只需要一次就可">
 <meta property="og:type" content="article">
-<meta property="og:title" content="about me">
-<meta property="og:url" content="http://oniceriver.github.io/2016/04/14/introduce/index.html">
+<meta property="og:title" content="更好的PHP配置工具">
+<meta property="og:url" content="http://oniceriver.github.io/2016/10/20/yaconf/index.html">
 <meta property="og:site_name" content="oniceriver">
-<meta property="og:description" content="关于我男程序猿主要技能:PHP其他技能:MySQL,JavaScript,Linux">
-<meta property="og:updated_time" content="2016-04-15T16:56:13.000Z">
+<meta property="og:description" content="现在的项目中使用了yaml作为路由等配置的格式.但是symfony解析yaml的工具过多的使用了正则解析,这严重的影响了PHP的运行速度.分析了性能瓶颈后,首先采用的是缓存的方式解决问题.即将解析后的配置数组存到redis中去,并设定一个过期时间.那在过期时间之前所有的请求均不再解析文件,而是直接去redis中查询配置信息.这样的好处是不管部署到多少台机子上,也不管有多少请求,解析都只需要一次就可">
+<meta property="og:updated_time" content="2016-10-20T06:47:50.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="about me">
-<meta name="twitter:description" content="关于我男程序猿主要技能:PHP其他技能:MySQL,JavaScript,Linux">
+<meta name="twitter:title" content="更好的PHP配置工具">
+<meta name="twitter:description" content="现在的项目中使用了yaml作为路由等配置的格式.但是symfony解析yaml的工具过多的使用了正则解析,这严重的影响了PHP的运行速度.分析了性能瓶颈后,首先采用的是缓存的方式解决问题.即将解析后的配置数组存到redis中去,并设定一个过期时间.那在过期时间之前所有的请求均不再解析文件,而是直接去redis中查询配置信息.这样的好处是不管部署到多少台机子上,也不管有多少请求,解析都只需要一次就可">
   
     <link rel="alternate" href="/atom.xml" title="oniceriver" type="application/atom+xml">
   
@@ -67,10 +67,10 @@
   </div>
 </header>
       <div class="outer">
-        <section id="main"><article id="post-introduce" class="article article-type-post" itemscope itemprop="blogPost">
+        <section id="main"><article id="post-yaconf" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
-    <a href="/2016/04/14/introduce/" class="article-date">
-  <time datetime="2016-04-14T05:09:49.000Z" itemprop="datePublished">2016-04-14</time>
+    <a href="/2016/10/20/yaconf/" class="article-date">
+  <time datetime="2016-10-20T05:51:02.000Z" itemprop="datePublished">2016-10-20</time>
 </a>
     
   </div>
@@ -81,7 +81,7 @@
         
   
     <h1 class="article-title" itemprop="name">
-      about me
+      更好的PHP配置工具
     </h1>
   
 
@@ -89,28 +89,33 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h2 id="关于我"><a href="#关于我" class="headerlink" title="关于我"></a>关于我</h2><h3 id="男"><a href="#男" class="headerlink" title="男"></a>男</h3><h3 id="程序猿"><a href="#程序猿" class="headerlink" title="程序猿"></a>程序猿</h3><h3 id="主要技能-PHP"><a href="#主要技能-PHP" class="headerlink" title="主要技能:PHP"></a>主要技能:PHP</h3><h3 id="其他技能-MySQL-JavaScript-Linux"><a href="#其他技能-MySQL-JavaScript-Linux" class="headerlink" title="其他技能:MySQL,JavaScript,Linux"></a>其他技能:MySQL,JavaScript,Linux</h3>
+        <p>现在的项目中使用了yaml作为路由等配置的格式.但是symfony解析yaml的工具过多的使用了正则解析,这严重的影响了PHP的运行速度.<br>分析了性能瓶颈后,首先采用的是缓存的方式解决问题.即将解析后的配置数组存到redis中去,并设定一个过期时间.那在过期时间之前所有的请求均不再解析文件,而是直接去redis中查询配置信息.<br>这样的好处是不管部署到多少台机子上,也不管有多少请求,解析都只需要一次就可以了.但是这样会有两个问题:</p>
+<pre><code>1. 初次解析的时候,仍然效率很低.如果在某次配置失效后,有很高的并发访问,会导致有多个解析任务同时进行,资源浪费,且会影响更多的请求.
+
+2. 当有灰度发布的时候,会影响所有的配置文件,不做多个redis存储的时候,会有相互影响的情况存在.
+</code></pre><p>今天碰巧看到了鸟哥的另外一个PHP扩展-yaconf,是基于ini的配置管理工具.yaconf可以做到在一个php主进程中,只需要解析一次,而且因为数据直接存在内存中,直接访问,没有复制的行为和计数器的问题,可以做到更高效的访问.而且可以把配置文件单独出来,不放在代码路径中,那就可以将一些敏感信息如数据库账号密码,或者通用的配置,保存在单独的路径中,使代码做到环境脱离.<br>但是yaconf还有以下问题:</p>
+<pre><code>1. 只能在php7中使用,而我们项目中使用的是5.6的版本.
+2. ini的配置格式,虽然能够支持hash,但是当出现嵌套的时候,仍然不便,不如yaml或者数组来的清晰
+</code></pre>
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://oniceriver.github.io/2016/04/14/introduce/" data-id="ciuhzj26700001aharksf6sk5" class="article-share-link">Partager</a>
+      <a data-url="http://oniceriver.github.io/2016/10/20/yaconf/" data-id="ciuhzj26b00011ahaz5idzkan" class="article-share-link">Partager</a>
       
       
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/yaconf/">yaconf</a></li></ul>
+
     </footer>
   </div>
   
     
 <nav id="article-nav">
   
-    <a href="/2016/10/20/yaf-basic/" id="article-nav-newer" class="article-nav-link-wrap">
-      <strong class="article-nav-caption">Récent</strong>
-      <div class="article-nav-title">
-        
-          yaf_basic
-        
-      </div>
-    </a>
   
+    <a href="/2016/10/20/yaf-basic/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Ancien</strong>
+      <div class="article-nav-title">yaf_basic</div>
+    </a>
   
 </nav>
 
