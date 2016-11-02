@@ -3,15 +3,18 @@
 <head>
   <meta charset="utf-8">
   
-  <title>yaf_basic | oniceriver</title>
+  <title>yaf的异常捕获机制 | oniceriver</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta property="og:type" content="article">
-<meta property="og:title" content="yaf_basic">
-<meta property="og:url" content="http://oniceriver.github.io/2016/10/20/yaf-basic/index.html">
+  <meta name="description" content="错误处理方式异常在application.dispatcher.throwException=true的情况下,错误会以异常的形式抛出.application.dispatcher.catchException=true 的情况下,yaf会把未捕获的异常捕获,并交由errorController/errorAction处理.application.dispatcher.catchException">
+<meta property="og:type" content="article">
+<meta property="og:title" content="yaf的异常捕获机制">
+<meta property="og:url" content="http://oniceriver.github.io/2016/10/21/yaf-exception-catch/index.html">
 <meta property="og:site_name" content="oniceriver">
-<meta property="og:updated_time" content="2016-10-20T05:50:44.000Z">
+<meta property="og:description" content="错误处理方式异常在application.dispatcher.throwException=true的情况下,错误会以异常的形式抛出.application.dispatcher.catchException=true 的情况下,yaf会把未捕获的异常捕获,并交由errorController/errorAction处理.application.dispatcher.catchException">
+<meta property="og:updated_time" content="2016-10-21T08:16:47.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="yaf_basic">
+<meta name="twitter:title" content="yaf的异常捕获机制">
+<meta name="twitter:description" content="错误处理方式异常在application.dispatcher.throwException=true的情况下,错误会以异常的形式抛出.application.dispatcher.catchException=true 的情况下,yaf会把未捕获的异常捕获,并交由errorController/errorAction处理.application.dispatcher.catchException">
   
     <link rel="alternate" href="/atom.xml" title="oniceriver" type="application/atom+xml">
   
@@ -64,10 +67,10 @@
   </div>
 </header>
       <div class="outer">
-        <section id="main"><article id="post-yaf-basic" class="article article-type-post" itemscope itemprop="blogPost">
+        <section id="main"><article id="post-yaf-exception-catch" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
-    <a href="/2016/10/20/yaf-basic/" class="article-date">
-  <time datetime="2016-10-20T03:54:37.000Z" itemprop="datePublished">2016-10-20</time>
+    <a href="/2016/10/21/yaf-exception-catch/" class="article-date">
+  <time datetime="2016-10-21T07:57:30.000Z" itemprop="datePublished">2016-10-21</time>
 </a>
     
   </div>
@@ -78,7 +81,7 @@
         
   
     <h1 class="article-title" itemprop="name">
-      yaf_basic
+      yaf的异常捕获机制
     </h1>
   
 
@@ -86,14 +89,18 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        
+        <h2 id="错误处理方式"><a href="#错误处理方式" class="headerlink" title="错误处理方式"></a>错误处理方式</h2><h3 id="异常"><a href="#异常" class="headerlink" title="异常"></a>异常</h3><p>在<code>application.dispatcher.throwException=true</code>的情况下,错误会以异常的形式抛出.<br><code>application.dispatcher.catchException=true</code> 的情况下,yaf会把未捕获的异常捕获,并交由errorController/errorAction处理.<br><code>application.dispatcher.catchException=false</code> 的情况下可以用set_exception_handler(),指定相应的异常处理方法.</p>
+<h3 id="报错"><a href="#报错" class="headerlink" title="报错"></a>报错</h3><p>在<code>application.dispatcher.throwException=false</code>的情况下,可通过 set_error_handler()来指定处理错误的方法.</p>
+<h3 id="致命异常-Fatal-Error"><a href="#致命异常-Fatal-Error" class="headerlink" title="致命异常 (Fatal Error)"></a>致命异常 (Fatal Error)</h3><p>fatal error 不管是那种异常处理情况下,均不会被捕获,也不能被error_handler处理,只能注册一个register_shutdown_function()方法,检查是否fatal error.</p>
+<h2 id="yaf异常处理的问题"><a href="#yaf异常处理的问题" class="headerlink" title="yaf异常处理的问题"></a>yaf异常处理的问题</h2><p>理想的处理方式,是统一处理输出.然而,yaf的catchException模式下,无法指定处理的回调函数,也无法处理fatal error </p>
+
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://oniceriver.github.io/2016/10/20/yaf-basic/" data-id="ciuji6i5f0002ms9fxld97atj" class="article-share-link">Share</a>
+      <a data-url="http://oniceriver.github.io/2016/10/21/yaf-exception-catch/" data-id="ciuji6i5h0003ms9fr052hwvs" class="article-share-link">Share</a>
       
       
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/yaf/">yaf</a></li></ul>
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/yaf-exception/">yaf exception</a></li></ul>
 
     </footer>
   </div>
@@ -101,19 +108,10 @@
     
 <nav id="article-nav">
   
-    <a href="/2016/10/20/yaconf/" id="article-nav-newer" class="article-nav-link-wrap">
-      <strong class="article-nav-caption">Newer</strong>
-      <div class="article-nav-title">
-        
-          更好的PHP配置工具
-        
-      </div>
-    </a>
   
-  
-    <a href="/2016/04/14/introduce/" id="article-nav-older" class="article-nav-link-wrap">
+    <a href="/2016/10/20/yaconf/" id="article-nav-older" class="article-nav-link-wrap">
       <strong class="article-nav-caption">Older</strong>
-      <div class="article-nav-title">about me</div>
+      <div class="article-nav-title">更好的PHP配置工具</div>
     </a>
   
 </nav>

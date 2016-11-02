@@ -52,9 +52,9 @@
       </nav>
       <nav id="sub-nav">
         
-          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="Flux RSS"></a>
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
         
-        <a id="nav-search-btn" class="nav-icon" title="Rechercher"></a>
+        <a id="nav-search-btn" class="nav-icon" title="Søk"></a>
       </nav>
       <div id="search-form-wrap">
         <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" results="0" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://oniceriver.github.io"></form>
@@ -64,6 +64,48 @@
 </header>
       <div class="outer">
         <section id="main">
+  
+    <article id="post-yaf-exception-catch" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2016/10/21/yaf-exception-catch/" class="article-date">
+  <time datetime="2016-10-21T07:57:30.000Z" itemprop="datePublished">2016-10-21</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2016/10/21/yaf-exception-catch/">yaf的异常捕获机制</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="错误处理方式"><a href="#错误处理方式" class="headerlink" title="错误处理方式"></a>错误处理方式</h2><h3 id="异常"><a href="#异常" class="headerlink" title="异常"></a>异常</h3><p>在<code>application.dispatcher.throwException=true</code>的情况下,错误会以异常的形式抛出.<br><code>application.dispatcher.catchException=true</code> 的情况下,yaf会把未捕获的异常捕获,并交由errorController/errorAction处理.<br><code>application.dispatcher.catchException=false</code> 的情况下可以用set_exception_handler(),指定相应的异常处理方法.</p>
+<h3 id="报错"><a href="#报错" class="headerlink" title="报错"></a>报错</h3><p>在<code>application.dispatcher.throwException=false</code>的情况下,可通过 set_error_handler()来指定处理错误的方法.</p>
+<h3 id="致命异常-Fatal-Error"><a href="#致命异常-Fatal-Error" class="headerlink" title="致命异常 (Fatal Error)"></a>致命异常 (Fatal Error)</h3><p>fatal error 不管是那种异常处理情况下,均不会被捕获,也不能被error_handler处理,只能注册一个register_shutdown_function()方法,检查是否fatal error.</p>
+<h2 id="yaf异常处理的问题"><a href="#yaf异常处理的问题" class="headerlink" title="yaf异常处理的问题"></a>yaf异常处理的问题</h2><p>理想的处理方式,是统一处理输出.然而,yaf的catchException模式下,无法指定处理的回调函数,也无法处理fatal error </p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://oniceriver.github.io/2016/10/21/yaf-exception-catch/" data-id="ciuji6i5h0003ms9fr052hwvs" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/yaf-exception/">yaf exception</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
   
     <article id="post-yaconf" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
@@ -98,7 +140,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://oniceriver.github.io/2016/10/20/yaconf/" data-id="ciuhzj26b00011ahaz5idzkan" class="article-share-link">Partager</a>
+      <a data-url="http://oniceriver.github.io/2016/10/20/yaconf/" data-id="ciuji6i5d0001ms9flpbkm6dq" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/yaconf/">yaconf</a></li></ul>
@@ -136,7 +178,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://oniceriver.github.io/2016/10/20/yaf-basic/" data-id="ciuhzj26c00021ahan6y93bal" class="article-share-link">Partager</a>
+      <a data-url="http://oniceriver.github.io/2016/10/20/yaf-basic/" data-id="ciuji6i5f0002ms9fxld97atj" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/yaf/">yaf</a></li></ul>
@@ -174,7 +216,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://oniceriver.github.io/2016/04/14/introduce/" data-id="ciuhzj26700001aharksf6sk5" class="article-share-link">Partager</a>
+      <a data-url="http://oniceriver.github.io/2016/04/14/introduce/" data-id="ciuji6i580000ms9fe9z22p16" class="article-share-link">Share</a>
       
       
     </footer>
@@ -194,9 +236,9 @@
   
     
   <div class="widget-wrap">
-    <h3 class="widget-title">Mot-clés</h3>
+    <h3 class="widget-title">Tags</h3>
     <div class="widget">
-      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/yaconf/">yaconf</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/yaf/">yaf</a></li></ul>
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/yaconf/">yaconf</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/yaf/">yaf</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/yaf-exception/">yaf exception</a></li></ul>
     </div>
   </div>
 
@@ -204,16 +246,16 @@
   
     
   <div class="widget-wrap">
-    <h3 class="widget-title">Nuage de mot-clés</h3>
+    <h3 class="widget-title">Tag Cloud</h3>
     <div class="widget tagcloud">
-      <a href="/tags/yaconf/" style="font-size: 10px;">yaconf</a> <a href="/tags/yaf/" style="font-size: 10px;">yaf</a>
+      <a href="/tags/yaconf/" style="font-size: 10px;">yaconf</a> <a href="/tags/yaf/" style="font-size: 10px;">yaf</a> <a href="/tags/yaf-exception/" style="font-size: 10px;">yaf exception</a>
     </div>
   </div>
 
   
     
   <div class="widget-wrap">
-    <h3 class="widget-title">Archives</h3>
+    <h3 class="widget-title">Arkiv</h3>
     <div class="widget">
       <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/10/">October 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/04/">April 2016</a></li></ul>
     </div>
@@ -223,9 +265,13 @@
   
     
   <div class="widget-wrap">
-    <h3 class="widget-title">Articles récents</h3>
+    <h3 class="widget-title">Siste innlegg</h3>
     <div class="widget">
       <ul>
+        
+          <li>
+            <a href="/2016/10/21/yaf-exception-catch/">yaf的异常捕获机制</a>
+          </li>
         
           <li>
             <a href="/2016/10/20/yaconf/">更好的PHP配置工具</a>
@@ -252,7 +298,7 @@
   <div class="outer">
     <div id="footer-info" class="inner">
       &copy; 2016 oniceriver<br>
-      Propulsé by <a href="http://hexo.io/" target="_blank">Hexo</a>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
     </div>
   </div>
 </footer>
